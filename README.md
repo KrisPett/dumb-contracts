@@ -1,4 +1,4 @@
-### Dumb contracts explained as Donald Trump
+### 'Dumb Contracts' explained as Donald Trump
 
 Look, folks, let me tell you about dumb contracts. They're not smart, they're not good, believe me. They're just like the deals made by sleepy Joe, terrible. They rely on humans, who knows what kind of mistakes they could make. And let me tell you, mistakes are bad, very bad.
 
