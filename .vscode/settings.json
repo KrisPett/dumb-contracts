@@ -1,9 +1,8 @@
 {
     "editor.rulers": [
-      {
-        "color": "#656565",
-        "column": 120
-      }
+        {
+            "color": "#656565",
+            "column": 120
+        }
     ]
-  }
-  
+}
