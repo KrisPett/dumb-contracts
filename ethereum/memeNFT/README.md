@@ -38,3 +38,9 @@ truffle migrate --network sepolia
 ```
 rm -r node_modules && rm package-lock.json && rm -r build && npm i && truffle compile && truffle migrate --network sepolia
 ```
+
+### ABI 
+
+```
+node getAbi.js
+```
