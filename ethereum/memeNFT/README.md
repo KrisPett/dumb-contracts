@@ -20,9 +20,13 @@ cd /app && \
 sh"
 ```
 
+### .env
 ```
 echo .env >> INFURA_API_KEY = "https://sepolia.infura.io/v3/<Your-API-Key>"
 MNEMONIC = "<Your-MetaMask-Secret-Recovery-Phrase>"
+TOKEN_URI=https://s3/imagebot/c0d411f7/metadata
+CONTRACT_ADDRESS=
+PUBLIC_ADDRESS=<public_wallet_address>
 ```
 
 ```
