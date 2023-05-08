@@ -13,7 +13,7 @@ module.exports = async function (callback) {
   const network = await web3.eth.net.getNetworkType()
 
   const tx = contract.methods.mintNFT(PUBLIC_ADDRESS, TOKEN_URI)
-  const receipt = await tx
+  await tx
   .send({
     from: (await web3.eth.getAccounts())[0],
     gas: await tx.estimateGas(),
