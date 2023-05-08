@@ -29,8 +29,16 @@ MNEMONIC = "<Your-MetaMask-Secret-Recovery-Phrase>"
 truffle compile
 ```
 
+### Create Contract
+
 ```
 truffle migrate --network sepolia
+```
+
+### Mint an NFT
+
+```
+truffle exec scripts/mintNFT.js --network sepolia
 ```
 
 ### Clean and Rebuild
