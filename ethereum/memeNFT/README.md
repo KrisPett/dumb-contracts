@@ -42,7 +42,7 @@ truffle migrate --network sepolia
 ### Mint an NFT
 
 ```
-truffle exec scripts/mintNFT.js --network sepolia
+truffle exec scripts/index.js --network sepolia
 ```
 
 ### Clean and Rebuild
