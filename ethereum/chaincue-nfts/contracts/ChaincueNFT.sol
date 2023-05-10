@@ -21,7 +21,7 @@ contract ChaincueNFT is ERC721, ERC721URIStorage, Ownable {
 
     constructor() ERC721("Chaincue", "CCNFT") {}
 
-    function mintNFT(address to, string memory uri) public onlyOwner returns (uint256){
+    function mintNFT(address to, string memory uri) public returns (uint256){
         _tokenIdCounter.increment();
         uint256 tokenId = _tokenIdCounter.current();
         _safeMint(to, tokenId);
