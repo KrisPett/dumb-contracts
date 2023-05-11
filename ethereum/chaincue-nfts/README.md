@@ -12,12 +12,14 @@ CONTRACT_ADDRESS=
 ### dev mode
 
 ```
-docker run -it --rm -p 3000:3000 --name node -v ${PWD}:/app node:19.0.0-alpine sh -c "\
+docker run -it --rm -p 3000:3000 --name node --network host -v ${PWD}:/workdir node:19.0.0-alpine sh -c "\
 npm install -g npm && \
 npm install -g truffle && \
 apk add --no-cache git && \
-cd /app && \
+cd /workdir && \
 sh"
+
+docker run -it --rm -p 8545:8545 --name ganache trufflesuite/ganache:v7.8.0 -m "mnemonic" -i 1337
 ```
 
 ### Get ABI
@@ -39,6 +41,7 @@ truffle compile
 
 ```
 truffle migrate --network sepolia
+truffle migrate --network development
 ```
 
 ### Mint an NFT
@@ -47,4 +50,8 @@ truffle migrate --network sepolia
 truffle exec scripts/mintNFT.js --network sepolia
 ```
 
-Remove ownable from the contract
+### List networks
+
+```
+truffle networks
+```
