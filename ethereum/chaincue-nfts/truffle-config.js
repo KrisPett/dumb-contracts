@@ -13,6 +13,7 @@ module.exports = {
       provider: () => new HDWalletProvider(MNEMONIC, INFURA_API_KEY),
       network_id: 11155111,
       gas: 5500000,
+      networkCheckTimeout: 1000000
     }
   },
   compilers: {

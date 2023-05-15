@@ -28,7 +28,8 @@ docker run -it --rm -p 8545:8545 --name ganache trufflesuite/ganache:v7.8.0 -m "
 docker run -v ${PWD}:/workdir ethereum/solc:0.8.19-alpine --abi \
 --include-path /workdir/node_modules/ \
 --base-path . /workdir/contracts/ChaincueNFT.sol \
--o /workdir/abi
+-o /workdir/abi \
+--overwrite
 ```
 
 ### Compile Contract
@@ -48,10 +49,23 @@ truffle migrate --network development
 
 ```
 truffle exec scripts/mintNFT.js --network sepolia
+truffle exec scripts/mintNFT.js --network development
 ```
 
 ### List networks
 
 ```
 truffle networks
+truffle console --network development
 ```
+
+### Check if communication with the blockchain is working
+
+```
+let balance = await web3.eth.getBalance('0x3De0A2fD4A90f9A160ebb2B8711192D1F0eB339D');
+console.log(balance)
+let accounts = await web3.eth.getAccounts();
+console.log(accounts)
+```
+
+truffle migrate --network sepolia dont work check why

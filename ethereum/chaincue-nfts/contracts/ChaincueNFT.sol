@@ -10,7 +10,7 @@ contract ChaincueNFT is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
-    constructor() ERC721("Chaincue", "CC") {}
+    constructor() ERC721("Chaincue", "CCU") {}
 
     function mintNFT(address to, string memory uri) public returns (uint256){
         _tokenIdCounter.increment();
@@ -20,6 +20,13 @@ contract ChaincueNFT is ERC721URIStorage, Ownable {
         return tokenId;
     }
 
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
+    function baseURI() pure public returns (string memory) {
+        return "https:test";
+    }
+
+    function burn(uint256 tokenId) public {
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "Caller is not approved or owner of the token");
+        _burn(tokenId);
+    }
+
 }
