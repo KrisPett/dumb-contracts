@@ -25,7 +25,7 @@ docker run -it --rm -p 8545:8545 --name ganache trufflesuite/ganache:v7.8.0 -m "
 ### Get ABI
 
 ```
-docker run -v ${PWD}:/workdir ethereum/solc:0.8.19-alpine --abi \
+docker run --rm -v ${PWD}:/workdir ethereum/solc:0.8.19-alpine --abi \
 --include-path /workdir/node_modules/ \
 --base-path . /workdir/contracts/ChaincueNFT.sol \
 -o /workdir/abi \
