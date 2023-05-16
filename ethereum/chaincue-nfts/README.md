@@ -12,12 +12,9 @@ CONTRACT_ADDRESS=
 ### dev mode
 
 ```
-docker run -it --rm -p 3000:3000 --name node --network host -v ${PWD}:/workdir node:19.0.0-alpine sh -c "\
-npm install -g npm && \
+docker run -it --rm -p 3000:3000 --name node --network host -v ${PWD}:/workdir -w /workdir node:19 bash -c "\
 npm install -g truffle && \
-apk add --no-cache git && \
-cd /workdir && \
-sh"
+bash"
 
 docker run -it --rm -p 8545:8545 --name ganache trufflesuite/ganache:v7.8.0 -m "mnemonic" -i 1337
 ```
@@ -56,6 +53,7 @@ truffle exec scripts/mintNFT.js --network development
 
 ```
 truffle networks
+truffle console --network sepolia
 truffle console --network development
 ```
 
@@ -67,5 +65,3 @@ console.log(balance)
 let accounts = await web3.eth.getAccounts();
 console.log(accounts)
 ```
-
-truffle migrate --network sepolia dont work check why

@@ -1,7 +1,7 @@
 // truffle console --network development
 
 // Get Balance
-let balance = await web3.eth.getBalance('0x3De0A2fD4A90f9A160ebb2B8711192D1F0eB339D');
+let balance = await web3.eth.getBalance('0xBA5deA80566bCB1d79ec380fF4aCde3815a09c8b');
 console.log(balance)
 
 // Get Accounts
@@ -16,7 +16,7 @@ const abi= [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"
 
 console.log(abi)
 
-let contract = new web3.eth.Contract(abi, "0xaacccff9C08Ae7978E957082A9C7B98B7993d204");
+let contract = new web3.eth.Contract(abi, "0xf91b686333FDF0d59dCdD5C5fEf0C1fCDBEf7bC5");
 console.log(contract)
 
 let nftToken1 = await contract.methods.tokenURI(1).call();
@@ -37,5 +37,5 @@ let name = await contract.methods.name().call();
 console.log(name)
 
 // Burn NFT
-let burn = await contract.methods.burn(2).call();
+let burn = await contract.methods.burn(1).call();
 console.log(burn)

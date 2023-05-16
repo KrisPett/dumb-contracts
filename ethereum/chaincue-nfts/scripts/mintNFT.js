@@ -1,4 +1,5 @@
 // truffle exec scripts/mintNFT.js --network development
+// truffle exec scripts/mintNFT.js --network sepolia
 require('dotenv').config()
 
 const {TOKEN_URI, CONTRACT_ADDRESS, PUBLIC_ADDRESS} = process.env
