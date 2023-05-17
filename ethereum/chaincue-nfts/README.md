@@ -12,7 +12,7 @@ CONTRACT_ADDRESS=
 ### dev mode
 
 ```
-docker run -it --rm -p 3000:3000 --name node --network host -v ${PWD}:/workdir -w /workdir node:19 bash -c "\
+docker run -it --rm -p 5000:3000 --network host -v ${PWD}:/workdir -w /workdir node:19 bash -c "\
 npm install -g truffle && \
 bash"
 
