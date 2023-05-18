@@ -9,7 +9,7 @@ MNEMONIC=
 CONTRACT_ADDRESS=
 ```
 
-### dev mode
+### Dev mode
 
 ```
 docker run -it --rm -p 5000:3000 --network host -v ${PWD}:/workdir -w /workdir node:19 bash -c "\
