@@ -8,12 +8,6 @@ npx hardhat vars get INFURA_API_URL
 npx hardhat vars get METAMASK_PRIVATE_KEY
 ```
 
-# Start hardhat
-
-```
-npx hardhat node
-```
-
 # Deploy localhost
 
 ```
