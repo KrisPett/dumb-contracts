@@ -1,13 +1,28 @@
-# Sample Hardhat Project
+# Setup
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+```
+npx hardhat vars set INFURA_API_URL
+npx hardhat vars set METAMASK_PRIVATE_KEY
 
-Try running some of the following tasks:
+npx hardhat vars get INFURA_API_URL
+npx hardhat vars get METAMASK_PRIVATE_KEY
+```
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
+# Start hardhat
+
+```
 npx hardhat node
+```
+
+# Deploy localhost
+
+```
+npx hardhat node
+npx hardhat run scripts/deploy.ts --network localhost
+```
+
+# Deploy sepolia
+```
 npx hardhat run scripts/deploy.ts
 ```
+
