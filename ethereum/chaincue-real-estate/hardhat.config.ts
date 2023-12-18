@@ -3,6 +3,7 @@ import {vars} from "hardhat/config";
 
 const INFURA_API_URL = vars.get("INFURA_API_URL");
 const METAMASK_PRIVATE_KEY = vars.get("METAMASK_PRIVATE_KEY");
+const ETHERSCAN_API_KEY = vars.get("ETHERSCAN_API_KEY");
 
 module.exports = {
   defaultNetwork: "sepolia",
@@ -31,5 +32,8 @@ module.exports = {
   },
   mocha: {
     timeout: 40000
-  }
+  },
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
+  },
 }

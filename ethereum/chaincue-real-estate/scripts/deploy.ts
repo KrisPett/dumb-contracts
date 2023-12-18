@@ -1,18 +1,12 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  const IntegerManipulation = await ethers.getContractFactory("IntegerManipulation");
+  const integerManipulation = await IntegerManipulation.deploy();
 
-  const lockedAmount = ethers.parseEther("0.001");
+  await integerManipulation.waitForDeployment().then(value => console.log(value))
 
-  const lock = await ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
-
-  await lock.waitForDeployment();
-
-  console.log(`Lock with ${ethers.formatEther(lockedAmount)}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`);
+  console.log(`IntegerManipulation deployed to: ${await integerManipulation.getAddress()}`);
 }
 
 main().catch((error) => {
