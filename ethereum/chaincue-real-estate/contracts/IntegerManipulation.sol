@@ -1,7 +1,6 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-// test1
 contract IntegerManipulation {
     int public integerValue;
 
@@ -17,5 +16,9 @@ contract IntegerManipulation {
         int oldValue = integerValue;
         integerValue -= _amount;
         emit ValueChanged(oldValue, integerValue);
+    }
+
+    function getIntegerValue() public view returns (int) {
+        return integerValue;
     }
 }
