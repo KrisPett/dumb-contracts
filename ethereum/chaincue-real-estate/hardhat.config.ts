@@ -1,7 +1,7 @@
 import "@nomicfoundation/hardhat-toolbox";
 import {vars} from "hardhat/config";
 
-const INFURA_API_URL = vars.get("INFURA_API_URL");
+const INFURA_API_KEY = vars.get("INFURA_API_KEY");
 const METAMASK_PRIVATE_KEY = vars.get("METAMASK_PRIVATE_KEY");
 const ETHERSCAN_API_KEY = vars.get("ETHERSCAN_API_KEY");
 
@@ -10,8 +10,12 @@ module.exports = {
   networks: {
     hardhat: {
     },
+    mainnet: {
+      url: "https://mainnet.infura.io/v3/" + INFURA_API_KEY,
+      accounts: [METAMASK_PRIVATE_KEY]
+    },
     sepolia: {
-      url: INFURA_API_URL,
+      url: "https://sepolia.infura.io/v3/" + INFURA_API_KEY,
       accounts: [METAMASK_PRIVATE_KEY]
     }
   },
