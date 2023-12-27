@@ -3,7 +3,7 @@
 - cat ~/.config/hardhat-nodejs/vars.json
 
 ```
-npm install --save-dev hardhat
+npm i 
 
 npx hardhat vars set INFURA_API_KEY
 npx hardhat vars set METAMASK_PRIVATE_KEY
