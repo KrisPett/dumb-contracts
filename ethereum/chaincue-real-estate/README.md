@@ -2,8 +2,11 @@
 
 - cat ~/.config/hardhat-nodejs/vars.json
 
+**node -v v20.10.0**
+**npm -v v10.2.3**
+
 ```
-npm i 
+npm i
 
 npx hardhat vars set INFURA_API_KEY
 npx hardhat vars set METAMASK_PRIVATE_KEY

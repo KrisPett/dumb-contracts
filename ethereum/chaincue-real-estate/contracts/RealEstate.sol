@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -17,7 +17,9 @@ contract RealEstate is ERC721Enumerable, Ownable {
     event PropertyRegistered(uint256 propertyId, string location, uint256 price);
     event PropertyTransferred(uint256 propertyId, address from, address to);
 
-    constructor() ERC721("RealEstateNFT", "RE-NFT") {}
+//    constructor() ERC721("RealEstateNFT", "RE-NFT") {}
+    constructor(address _initialOwner) ERC721("RealEstateNFT", "RE-NFT") Ownable(_initialOwner) {}
+
 
     function registerProperty(string memory _location, uint256 _price) external onlyOwner {
         uint256 propertyId = propertyCount + 1;

@@ -1,12 +1,13 @@
-import { ethers } from "hardhat";
+import {ethers} from "hardhat";
 
 async function main() {
-  const IntegerManipulation = await ethers.getContractFactory("IntegerManipulation");
-  const integerManipulation = await IntegerManipulation.deploy();
+  const contract = await ethers.getContractFactory("RealEstate");
+  const initialOwnerAddress = 'YOUR_INITIAL_OWNER_ADDRESS';
+  const contractDeployed = await contract.deploy(initialOwnerAddress, {from: initialOwnerAddress});
 
-  await integerManipulation.waitForDeployment().then(value => console.log(value))
+  await contractDeployed.waitForDeployment().then(value => console.log(value))
 
-  console.log(`IntegerManipulation deployed to: ${await integerManipulation.getAddress()}`);
+  console.log(`contractDeployed deployed to: ${await contractDeployed.getAddress()}`);
 }
 
 main().catch((error) => {
