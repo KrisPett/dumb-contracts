@@ -32,8 +32,7 @@ contract RealEstate is ERC721URIStorage, Ownable {
     }
 
     function transferProperty(address to, uint256 tokenId) public {
-        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721: transfer caller is not owner nor approved");
         _transfer(msg.sender, to, tokenId);
     }
 }
-
