@@ -1,38 +1,52 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract RealEstate is ERC721URIStorage, Ownable {
-    uint256 public nextTokenId;
-    mapping(uint256 => PropertyDetails) public propertyDetails;
-
-    struct PropertyDetails {
-        string name;
-        string location;
-        uint256 size;
+contract RealEstate is ERC721, Ownable {
+    struct Property {
+        uint256 price;
+        bool forSale;
     }
 
-    event PropertyMinted(uint256 indexed tokenId, address indexed owner, PropertyDetails details);
+    mapping(uint256 => Property) public properties;
 
-    constructor() ERC721("RealEstate", "RET") {}
+    event PropertyListed(uint256 indexed propertyId, uint256 price);
+    event PropertySold(uint256 indexed propertyId, uint256 price, address indexed seller, address indexed buyer);
 
-    function mintProperty(string memory name, string memory location, uint256 size, string memory tokenURI) public onlyOwner {
-        uint256 tokenId = nextTokenId;
-        nextTokenId++;
-
-        _mint(msg.sender, tokenId);
-        _setTokenURI(tokenId, tokenURI);
-
-        PropertyDetails memory details = PropertyDetails(name, location, size);
-        propertyDetails[tokenId] = details;
-
-        emit PropertyMinted(tokenId, msg.sender, details);
+    constructor() ERC721("RealEstateToken", "RET") Ownable(msg.sender) {
     }
 
-    function transferProperty(address to, uint256 tokenId) public {
-        require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721: transfer caller is not owner nor approved");
-        _transfer(msg.sender, to, tokenId);
+    function mintProperty(uint256 propertyId, uint256 price) public onlyOwner {
+        _mint(msg.sender, propertyId);
+        properties[propertyId] = Property(price, false);
     }
+
+    function listProperty(uint256 propertyId, uint256 price) public {
+        require(ownerOf(propertyId) == msg.sender, "Not the property owner");
+        properties[propertyId].price = price;
+        properties[propertyId].forSale = true;
+        emit PropertyListed(propertyId, price);
+    }
+
+    function buyProperty(uint256 propertyId) public payable {
+        Property storage property = properties[propertyId];
+        require(property.forSale, "Property is not for sale");
+        require(msg.value >= property.price, "Insufficient funds sent");
+
+        address seller = ownerOf(propertyId);
+        payable(seller).transfer(msg.value);
+        _transfer(seller, msg.sender, propertyId);
+        property.forSale = false;
+
+        emit PropertySold(propertyId, property.price, seller, msg.sender);
+    }
+
+    function getProperty(uint256 propertyId) public view returns (address, uint256, bool) {
+        Property storage property = properties[propertyId];
+        address currentOwner = ownerOf(propertyId);
+        return (currentOwner, property.price, property.forSale);
+    }
+
 }
