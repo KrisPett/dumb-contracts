@@ -11,9 +11,11 @@ contract RealEstate is ERC721, Ownable {
     }
 
     mapping(uint256 => Property) public properties;
+    uint256 public totalMintedProperties;
 
     event PropertyListed(uint256 indexed propertyId, uint256 price);
     event PropertySold(uint256 indexed propertyId, uint256 price, address indexed seller, address indexed buyer);
+    event PropertyMinted(uint256 indexed propertyId, uint256 totalMinted);
 
     constructor() ERC721("RealEstateToken", "RET") Ownable(msg.sender) {
     }
@@ -21,12 +23,16 @@ contract RealEstate is ERC721, Ownable {
     function mintProperty(uint256 propertyId, uint256 price) public onlyOwner {
         _mint(msg.sender, propertyId);
         properties[propertyId] = Property(price, false);
+        totalMintedProperties += 1;
+
+        emit PropertyMinted(propertyId, totalMintedProperties);
     }
 
     function listProperty(uint256 propertyId, uint256 price) public {
         require(ownerOf(propertyId) == msg.sender, "Not the property owner");
         properties[propertyId].price = price;
         properties[propertyId].forSale = true;
+
         emit PropertyListed(propertyId, price);
     }
 

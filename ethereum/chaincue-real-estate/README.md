@@ -1,6 +1,6 @@
 # Setup
 
-- cat ~/.config/hardhat-nodejs/vars.json
+cat ~/.config/hardhat-nodejs/vars.json
 
 **node -v v20.10.0**
 **npm -v v10.2.3**
