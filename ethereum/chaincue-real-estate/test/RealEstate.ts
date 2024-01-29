@@ -21,7 +21,7 @@ describe("RealEstate Contract", function () {
     });
   });
 
-  describe("Get Property", () => {
+  describe.only("Get Property", () => {
     let realEstate: RealEstate
 
     before(async function () {
@@ -42,13 +42,10 @@ describe("RealEstate Contract", function () {
     })
   })
 
-  describe.only("Minting Properties", function () {
+  describe("Minting Properties", function () {
     let realEstate: RealEstate
-    let owner: { address: any; };
-    let addr1: any;
 
     before(async function () {
-      // [owner, addr1] = await ethers.getSigners();
       const RealEstate = await ethers.getContractFactory("RealEstate");
       realEstate = RealEstate.attach(deployedContractAddress) as RealEstate;
     });
@@ -61,7 +58,30 @@ describe("RealEstate Contract", function () {
       let response = await realEstate.mintProperty(propertyId, price);
       console.log(response);
     });
+  });
 
+  describe("List Property", function () {
+    let realEstate: RealEstate
+
+    before(async function () {
+      const RealEstate = await ethers.getContractFactory("RealEstate");
+      realEstate = RealEstate.attach(deployedContractAddress) as RealEstate;
+    });
+
+    it("should list property", async function () {
+    });
+  });
+
+  describe("buy Property", function () {
+    let realEstate: RealEstate
+
+    before(async function () {
+      const RealEstate = await ethers.getContractFactory("RealEstate");
+      realEstate = RealEstate.attach(deployedContractAddress) as RealEstate;
+    });
+
+    it("should buy a property", async function () {
+    });
   });
 
 });
