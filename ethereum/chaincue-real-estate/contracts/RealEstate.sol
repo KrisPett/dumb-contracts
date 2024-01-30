@@ -17,11 +17,11 @@ contract RealEstate is ERC721, Ownable {
     event PropertySold(uint256 indexed propertyId, uint256 price, address indexed seller, address indexed buyer);
     event PropertyMinted(uint256 indexed propertyId, uint256 totalMinted);
 
-    constructor() ERC721("RealEstateToken", "RET") Ownable(msg.sender) {
+    constructor() ERC721("ChaincueRealEstate", "CRT") Ownable(msg.sender) {
     }
 
     function mintProperty(uint256 propertyId, uint256 price) public onlyOwner {
-        _mint(msg.sender, propertyId);
+        _safeMint(msg.sender, propertyId);
         properties[propertyId] = Property(price, false);
         totalMintedProperties += 1;
 

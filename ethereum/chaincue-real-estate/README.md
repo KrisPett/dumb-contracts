@@ -8,8 +8,8 @@ cat ~/.config/hardhat-nodejs/vars.json
 ```
 npm i
 
-npx hardhat vars set INFURA_API_KEY
 npx hardhat vars set METAMASK_PRIVATE_KEY
+npx hardhat vars set INFURA_API_KEY
 npx hardhat vars set ETHERSCAN_API_KEY
 
 npx hardhat vars get INFURA_API_KEY
