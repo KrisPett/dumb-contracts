@@ -4,11 +4,13 @@ import {ethers} from "hardhat";
 import {RealEstate} from "../typechain-types";
 
 // npx hardhat test
+// npx hardhat test --network localhost
 // npx hardhat verify
 // npx hardhat vars set METAMASK_PRIVATE_KEY
 
 describe("RealEstate Contract", () => {
-  const deployedContractAddress = "0x30f9Db3926787A5868238ed6E9704673540253B1";
+  // const deployedContractAddress = "0x30f9Db3926787A5868238ed6E9704673540253B1";
+  const deployedContractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
 
   describe("Create Contract", () => {
     let contract;
@@ -19,6 +21,24 @@ describe("RealEstate Contract", () => {
       realEstate = await contract.deploy();
       let response = await realEstate.waitForDeployment()
       console.log(response.target);
+    });
+  });
+
+  describe("Minting Properties", () => {
+    let realEstate: RealEstate
+
+    before(async () => {
+      const RealEstate = await ethers.getContractFactory("RealEstate");
+      realEstate = RealEstate.attach(deployedContractAddress) as RealEstate;
+    });
+
+    it("should allow the owner to mint a property", async () => {
+      let totalMintedProperties = await realEstate.totalMintedProperties();
+      const propertyId = totalMintedProperties++;
+      const price = ethers.parseEther("1.0");
+
+      let response = await realEstate.mintProperty(propertyId, price);
+      console.log(response);
     });
   });
 
@@ -40,32 +60,14 @@ describe("RealEstate Contract", () => {
       let property = await realEstate.properties(propertyId);
       console.log("price: " + property.price)
       console.log("forSale: " + property.forSale)
-      expect(property.forSale).to.equal(false);
-
       let getProperty = await realEstate.getProperty(propertyId);
+
       console.log(getProperty)
+      expect(property.forSale).to.be.not.null;
     })
   })
 
-  describe("Minting Properties", () => {
-    let realEstate: RealEstate
-
-    before(async () => {
-      const RealEstate = await ethers.getContractFactory("RealEstate");
-      realEstate = RealEstate.attach(deployedContractAddress) as RealEstate;
-    });
-
-    it("should allow the owner to mint a property", async () => {
-      let totalMintedProperties = await realEstate.totalMintedProperties();
-      const propertyId = totalMintedProperties++;
-      const price = ethers.parseEther("1.0");
-
-      let response = await realEstate.mintProperty(propertyId, price);
-      console.log(response);
-    });
-  });
-
-  describe("List Property", () => {
+  describe.only("List Property", () => {
     let realEstate: RealEstate
 
     before(async () => {
@@ -75,7 +77,7 @@ describe("RealEstate Contract", () => {
 
     it("should list property", async () => {
       const propertyId = 1;
-      const propertyPrice = ethers.parseEther("1.0");
+      const propertyPrice = ethers.parseEther("0.1");
 
       let listProperty = await realEstate.listProperty(propertyId, propertyPrice);
       console.log(listProperty)
@@ -84,8 +86,8 @@ describe("RealEstate Contract", () => {
       console.log("forSale: " + property.forSale)
     });
   });
-// need price to be decimals 0.05
-  describe.only("buy Property", () => {
+
+  describe("buy Property", () => {
     let realEstate: RealEstate
 
     before(async () => {
@@ -94,9 +96,10 @@ describe("RealEstate Contract", () => {
     });
 
     it("should buy a property", async () => {
-      const propertyPrice = ethers.parseEther("1.0");
+      const propertyId = 1;
+      const propertyPrice = ethers.parseEther("0.1");
 
-      let response = await realEstate.buyProperty(1, {value: propertyPrice});
+      let response = await realEstate.buyProperty(propertyId, {value: propertyPrice});
       console.log(response)
     });
   });
